@@ -1,12 +1,11 @@
 package ktragiuamodule2;
 
-import  java.util.Scanner;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.String;
 
-public class ManagerStudent{
-    public static void main(String[] args)
-    {
+public class ManagerStudent {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Menu");
         System.out.println("1. Add student.");
@@ -15,27 +14,38 @@ public class ManagerStudent{
         System.out.println("4. Sourt student by gpa.");
         System.out.println("5. Show student");
         System.out.println("0. Exit");
-        //System.out.println("Enter your choice: ");
-        //int choice = scanner.nextInt();
+        System.out.println("Enter your choice: ");
+        int choice = scanner.nextInt();
         int size;
         System.out.println("Nhap size:");
-        size  =scanner.nextInt();
+        size = scanner.nextInt();
         Student student = new Student();
         Quanlysinhvien quanly = new Quanlysinhvien();
-        quanly.AddStudent(student,size);
-        System.out.println("Nhap id sinh vien muon xoa");
-        String id1 = scanner.nextLine();
-        quanly.DeleteStudent(id1,size);
-        quanly.ShowStudent(size);
+        do{
+        switch (choice) {
+            case 1:
+                quanly.AddStudent(student, size);
+            case 5:
+                quanly.ShowStudent(size);
+                break;
+            case 2:
+                System.out.println("Nhap id sinh vien muon xoa");
+                String id1 = scanner.nextLine();
+                quanly.DeleteStudent(id1, size);
+                break;
+        }
+        }while (choice <= 0);
     }
 }
-class  Quanlysinhvien{
+
+class Quanlysinhvien {
     Scanner input = new Scanner(System.in);
     String[][] array = new String[10][5];
-    public void AddStudent(Student student,int n){
-        int i,j;
-        for(i =0;i<n;i++) {
-            System.out.println("Nhap sinh vien thu"+(i+1)+"\n");
+
+    public void AddStudent(Student student, int n) {
+        int i, j;
+        for (i = 0; i < n; i++) {
+            System.out.println("Nhap sinh vien thu" + (i + 1) + "\n");
             System.out.println("Nhập id: ");
             String id = input.nextLine();
             array[i][0] = id;
@@ -54,33 +64,34 @@ class  Quanlysinhvien{
         }
 
     }
-    public void DeleteStudent(String id1,int size){
+
+    public void DeleteStudent(String id1, int size) {
         int index = 0;
-        int i,j;
-        for(i = 0;i<size;i++){
-            if(array[i][0] == id1){
+        int i, j;
+        for (i = 0; i < size; i++) {
+            if (array[i][0] == id1) {
                 index = i;
             }
         }
-        for(i = index;i<size-1;i++)
-        {
-            for(j = i+1;i<size;i++)
-            {
+        for (i = index; i < size - 1; i++) {
+            for (j = i + 1; i < size; i++) {
                 array[i][i] = array[j][j];
             }
         }
 
     }
-    public void ShowStudent(int n){
-        for(int i = 0;i<n;i++){
-            System.out.println("Sinh vien thu "+(i+1));
-            for(int j = 0;j<5;j++){
-                System.out.println("\t"+array[i][j]+"\t");
+
+    public void ShowStudent(int n) {
+        for (int i = 0; i < n; i++) {
+            System.out.println("Sinh vien thu " + (i + 1));
+            for (int j = 0; j < 5; j++) {
+                System.out.println("\t" + array[i][j] + "\t");
             }
         }
     }
 
 }
+
 class Student {
     private String id;
     private String name;
